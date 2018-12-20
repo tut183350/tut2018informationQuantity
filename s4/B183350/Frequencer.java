@@ -14,6 +14,8 @@ public class Frequencer implements FrequencerInterface{
 	int targetLength = myTarget.length;
 	int spaceLength = mySpace.length;
 	int count = 0;
+	//for文の範囲がこのままでは配列の範囲外にアクセスしてしまうのでいかに変更したほうがよい(?)
+	//for(int start = 0; start<spaceLength - targetLength + 1; start++)にする
 	for(int start = 0; start<spaceLength; start++) { // Is it OK?
 	    boolean abort = false;
 	    for(int i = 0; i<targetLength; i++) {
