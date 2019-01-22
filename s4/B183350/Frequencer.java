@@ -142,6 +142,7 @@ public class Frequencer implements FrequencerInterface{
 
     
     //return 0; // This line should be modified.
+    //
   }
 
   private int subByteStartIndex(int start, int end) {
