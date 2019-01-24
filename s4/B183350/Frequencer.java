@@ -129,7 +129,7 @@ public class Frequencer implements FrequencerInterface{
         String str_j = str.substring(suffixArray[j] ,end);
         String tar = new String(myTarget);
         tar = tar.substring(j,j + 1);
-        if(str.substring(suffixArray[i] ,str.length()).startsWith(tar)){
+        if(str_i.startsWith(tar)){
             return 0;
         }
         if(str_i.compareTo(str_j) > 0) {
