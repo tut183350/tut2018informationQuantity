@@ -1,4 +1,4 @@
-package s4.B183350; // Please modify to s4.Bnnnnnn, where nnnnnn is your student ID. 
+package s4.B183350; // Please modify to s4.Bnnnnnn, where nnnnnn is your student ID.
 import java.lang.*;
 import s4.specification.*;
 
@@ -11,8 +11,8 @@ public interface InformationEstimatorInterface{
 // It returns Double.MAX_VALUE, when the true value is infinite, or space is not set.
 // The behavior is undefined, if the true value is finete but larger than Double.MAX_VALUE.
 // Note that this happens only when the space is unreasonably large. We will encounter other problem anyway.
-// Otherwise, estimation of information quantity, 
-}                        
+// Otherwise, estimation of information quantity,
+}
 */
 
 public class InformationEstimator implements InformationEstimatorInterface{
@@ -35,9 +35,9 @@ public class InformationEstimator implements InformationEstimatorInterface{
     }
 
     public void setTarget(byte [] target) { myTarget = target;}
-    public void setSpace(byte []space) { 
+    public void setSpace(byte []space) {
 	myFrequencer = new Frequencer();
-	mySpace = space; myFrequencer.setSpace(space); 
+	mySpace = space; myFrequencer.setSpace(space);
     }
 
     public double estimation(){
@@ -48,7 +48,7 @@ public class InformationEstimator implements InformationEstimatorInterface{
 		np = 1<<(myTarget.length-1);
 		// System.out.println("np="+np+" length="+myTarget.length);
 		double value = Double.MAX_VALUE; // value = mininimum of each "value1".
-		/*mycode */
+		/*mycode
 		myFrequencer.setTarget(subBytes(myTarget, 0, 1));
 		myIq[0] = iq(myFrequencer.frequency());
 		for(int i = 1; i < myTarget.length; i++){
@@ -66,8 +66,28 @@ public class InformationEstimator implements InformationEstimatorInterface{
 			System.out.println(myIq[i]);
 		}
 		return myIq[myTarget.length-1];
-		/*mycode */
-		/*
+		mycode */
+
+    /*mycode2*/
+    myFrequencer.setTarget(subBytes(myTarget, 0, 1));
+    myIq[0] = iq(myFrequencer.frequency());
+    for(int i = 1; i < myTarget.length; i++){ // Roop of calculate myIq[i].
+      myFrequencer.setTarget(subBytes(myTarget, 0, i+1));
+      double min = iq(myFrequencer.frequency()); // Set min the infomation quantity of i characters.
+      for(int j = 0; j < i; j++){ // Roop of calculate minimum value.
+        iq1 = myIq[j];
+        myFrequencer.setTarget(subBytes(myTarget, j+1, i+1));
+        iq2 = iq(myFrequencer.frequency());
+        if(iq1 + iq2 < min && iq1 + iq2 != Double.NEGATIVE_INFINITY){
+          min = iq1 + iq2; // Set min the smaller one.
+        }
+      }
+      myIq[i] = min;
+    }
+    return myIq[myTarget.length-1];
+    /*mycode2*/
+
+		/*umecode
 		for(int p=0; p<np; p++) { // There are 2^(n-1) kinds of partitions.
 			// binary representation of p forms partition.
 			// for partition {"ab" "cde" "fg"}
@@ -88,7 +108,7 @@ public class InformationEstimator implements InformationEstimatorInterface{
 			while(start<myTarget.length) {
 				// System.out.write(myTarget[end]);
 				end++;;
-			while(partition[end] == false) { 
+			while(partition[end] == false) {
 				// System.out.write(myTarget[end]);
 				end++;
 			}
@@ -103,7 +123,7 @@ public class InformationEstimator implements InformationEstimatorInterface{
 			if(value1 < value) value = value1;
 		}
 		return value;
-		*/
+		umecode*/
     }
 
     public static void main(String[] args) {
@@ -151,8 +171,3 @@ public class InformationEstimator implements InformationEstimatorInterface{
 	System.out.println(">000000 "+value);
     }
 }
-				  
-			       
-
-	
-    
